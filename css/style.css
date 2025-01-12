@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+}
+
+a {
+    font-size: 1.2em;
+}
+
+p, span {
+    font-size: 1em;
+}
+
+h2 {
+    text-transform: uppercase;
+    font-size: 1.7em;
+}
+
+h2.title {
+    text-align: center;
+}
+
+i#eye {
+    color: #000000;
+}
+
+.btn-yellow {
+    background-color: #fddb3a;
+}
+
+.btn-yellow:hover {
+    background-color: #f1c600;
+}

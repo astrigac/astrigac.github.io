@@ -1,0 +1,74 @@
+@import "style.css";
+
+body {
+    background: #272727;
+}
+
+h2, span, a, p, label, small {
+    color: #f6f4e6 !important;
+}
+
+.navMenu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.navMenu a {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 500;
+    display: inline-block;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.navMenu a:hover, h2.title {
+    color: #fddb3a !important;
+}
+
+.navMenu .dot {
+    width: 6px;
+    height: 6px;
+    background: #fddb3a;
+    border-radius: 50%;
+    opacity: 0;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    margin: 0 auto;
+}
+
+.navMenu .wrapper {
+    margin: 10px 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.navMenu .wrapper div {
+    margin: 0 auto;
+}
+
+input:focus{
+    outline: none !important;
+    box-shadow: none !important;
+    border: 0;
+}
+
+@media only screen and (min-width: 992px) {
+    .mainWrapper {
+        display: flex;
+    }
+
+    .navMenu .wrapper {
+        margin: 0 20px;
+    }
+
+    .navMenu a:hover ~ .dot {
+        -webkit-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out;
+        opacity: 1;
+    }
+}

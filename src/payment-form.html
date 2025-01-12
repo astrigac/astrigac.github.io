@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Alexandra Slezakova">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="#">
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="../css/style.css">
+
+  <title>WAP PROJECT 2</title>
+
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="https://kit.fontawesome.com/613550c522.js" crossorigin="anonymous"></script>
+
+  <script>
+    // unset doNotTrack flag
+    Object.defineProperty(window.navigator, 'doNotTrack', {
+      value: null
+    });
+
+    // _hjSettings must be defined here
+    (function(h,o,t,j,a,r){
+      h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+      h._hjSettings={hjid:5240223,hjsv:6};
+      a=o.getElementsByTagName('head')[0];
+      r=o.createElement('script');r.async=1;
+      r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+      a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  </script>
+
+  <!--<script src="../js/hotjar-3411861.js"></script>
+  <script src="../js/modules.e8a3d1a16d3ae98012cf.js"></script>-->
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-10 ms-auto me-auto">
+      <h2 class="mt-5">Sensitive user input - Changed replay script</h2>
+      <p class="mt-1 mb-1"><strong>Demo steps:</strong> Fill the following form with fake credentials. The session is
+        recorded using a changed replay script, and all leaked data will be shown in the recording.</p>
+
+      <!-- Credit card form -->
+      <section class="mt-3">
+        <div class="row">
+          <div class="col-md-8 mb-4">
+            <div class="card mb-4">
+              <div class="card-header py-3">
+                <h5 class="mb-0">Biling details</h5>
+              </div>
+              <div class="card-body">
+                <form>
+                  <div class="row mb-4">
+                    <div class="col">
+                      <div class="form-outline">
+                        <input type="text" id="firstname" class="form-control" />
+                        <label class="form-label" for="firstname">First name</label>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-outline">
+                        <input type="text" id="lastname" class="form-control" />
+                        <label class="form-label" for="lastname">Last name</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Text input -->
+                  <div class="form-outline mb-4">
+                    <input type="text" id="companyName" class="form-control" autocomplete="organization"/>
+                    <label class="form-label" for="companyName">Company name</label>
+                  </div>
+
+                  <!-- Text input -->
+                  <div class="form-outline mb-4">
+                    <input type="text" id="address" class="form-control" />
+                    <label class="form-label" for="address">Address</label>
+                  </div>
+
+                  <!-- Email input -->
+                  <div class="form-outline mb-4">
+                    <input type="email" id="email" class="form-control" autocomplete="email"/>
+                    <label class="form-label" for="email">Email</label>
+                  </div>
+
+                  <!-- Number input -->
+                  <div class="form-outline mb-4">
+                    <input type="tel" id="phone" class="form-control" autocomplete="tel"/>
+                    <label class="form-label" for="phone">Phone</label>
+                  </div>
+
+                  <hr class="my-4" />
+
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="checkoutForm1" />
+                    <label class="form-check-label" for="checkoutForm1">
+                      Shipping address is the same as my billing address
+                    </label>
+                  </div>
+
+                  <div class="form-check mb-4">
+                    <input class="form-check-input" type="checkbox" value="" id="checkoutForm2" checked />
+                    <label class="form-check-label" for="checkoutForm2">
+                      Save this information for next time
+                    </label>
+                  </div>
+
+                  <hr class="my-4" />
+
+                  <h5 class="mb-4">Payment</h5>
+
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="checkoutForm3"
+                           checked />
+                    <label class="form-check-label" for="checkoutForm3">
+                      Credit card
+                    </label>
+                  </div>
+
+                  <div class="row mb-4">
+                    <div class="col">
+                      <div class="form-outline">
+                        <input type="text" id="ccname" class="form-control" autocomplete="cc-name"/>
+                        <label class="form-label" for="ccname">Name on card</label>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-outline">
+                        <input type="text" id="ccnumber" class="form-control" autocomplete="cc-number"/>
+                        <label class="form-label" for="ccnumber">Credit card number</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-4">
+                    <div class="col-3">
+                      <div class="form-outline">
+                        <input type="text" id="ccexpiry" class="form-control" autocomplete="cc-exp"/>
+                        <label class="form-label" for="ccexpiry">Expiration</label>
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="form-outline">
+                        <input type="text" id="cvc" class="form-control" autocomplete="cc-csc"/>
+                        <label class="form-label" for="cvc">CVV</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button class="btn btn-yellow btn-lg btn-block" type="submit">
+                    Continue to checkout
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-4">
+            <div class="card mb-4">
+              <div class="card-header py-3">
+                <h5 class="mb-0">Summary</h5>
+              </div>
+              <div class="card-body">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                    Products
+                    <span>$53.98</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                    Shipping
+                    <span>Gratis</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                    <div>
+                      <strong>Total amount</strong>
+                      <strong>(including VAT)</strong>
+                    </div>
+                    <span><strong>$53.98</strong></span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

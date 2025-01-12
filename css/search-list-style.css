@@ -1,0 +1,60 @@
+body {
+    background: #272727;
+}
+
+h2, p {
+    color: #f6f4e6 !important;
+}
+
+.form {
+    position: relative;
+}
+
+.form .fa-search{
+    position: absolute;
+    top: 20px;
+    left: 20px !important;
+    color: #9ca3af;
+}
+
+.form span{
+    position: absolute;
+    right: 17px;
+    top: 13px;
+    padding: 2px;
+    border-left: 1px solid #d1d5db;
+}
+
+.form-input{
+    height: 55px;
+    text-indent: 33px;
+    border-radius: 0 !important;
+}
+
+.form-input:focus{
+    outline: none !important;
+    box-shadow: none !important;
+    border: 0;
+}
+
+ul {
+    list-style-type: none;
+    display: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul li span {
+    border: 1px solid #ddd;
+    background-color: white;
+    margin-top: -1px;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    display: block;
+    font-size: 1em;
+}
+
+ul li span:hover:not(.header) {
+    background-color: #eee;
+}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Alexandra Slezakova">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="#">
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/search-list-style.css">
+
+  <title>WAP PROJECT 2</title>
+
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="https://kit.fontawesome.com/613550c522.js" crossorigin="anonymous"></script>
+
+  <!-- Hotjar Tracking Code -->
+  <script>
+    (function(h,o,t,j,a,r){
+      h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+      h._hjSettings={hjid:5240223,hjsv:6};
+      a=o.getElementsByTagName('head')[0];
+      r=o.createElement('script');r.async=1;
+      r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+      a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  </script>
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-8 ms-auto me-auto">
+      <h2 class="mt-5">Information displayed on a page</h2>
+      <p class="mt-1 mb-1"><strong>Demo steps:</strong> Use the search bar to find any country in Europe by its name.
+        Even though the input field is masked in the session recording, search results are not and can be used to reveal the user's search.</p>
+
+      <div class="form mt-2">
+        <i class="fa-solid fa-magnifying-glass fa-search"></i>
+        <input type="text" id="search_input" class="form-control form-input" onkeyup="filterFunction()" placeholder="Search anything..." aria-label="search">
+      </div>
+
+      <ul id="list">
+        <li><span>Albania</span></li>
+        <li><span>Andorra</span></li>
+        <li><span>Austria</span></li>
+        <li><span>Belarus</span></li>
+        <li><span>Bosnia and Herzegovina</span></li>
+        <li><span>Bulgaria</span></li>
+        <li><span>Croatia</span></li>
+        <li><span>Czechia</span></li>
+        <li><span>Estonia</span></li>
+        <li><span>Finland</span></li>
+        <li><span>France</span></li>
+        <li><span>Germany</span></li>
+        <li><span>Greece</span></li>
+        <li><span>Holy See</span></li>
+        <li><span>Hungary</span></li>
+        <li><span>Iceland</span></li>
+        <li><span>Ireland</span></li>
+        <li><span>Italy</span></li>
+        <li><span>Kosovo</span></li>
+        <li><span>Latvia</span></li>
+        <li><span>Liechtenstein</span></li>
+        <li><span>Lithuania</span></li>
+        <li><span>Luxembourg</span></li>
+        <li><span>Malta</span></li>
+        <li><span>Moldova</span></li>
+        <li><span>Monaco</span></li>
+        <li><span>Montenegro</span></li>
+        <li><span>Netherlands</span></li>
+        <li><span>North Macedonia</span></li>
+        <li><span>Norway</span></li>
+        <li><span>Poland</span></li>
+        <li><span>Portugal</span></li>
+        <li><span>Romania</span></li>
+        <li><span>Russia</span></li>
+        <li><span>San Marino</span></li>
+        <li><span>Serbia</span></li>
+        <li><span>Slovakia</span></li>
+        <li><span>Slovenia</span></li>
+        <li><span>Spain</span></li>
+        <li><span>Sweden</span></li>
+        <li><span>Switzerland</span></li>
+        <li><span>Ukraine</span></li>
+        <li><span>United Kingdom</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  function filterFunction() {
+    let input = document.getElementById('search_input');
+    let filter = input.value.toUpperCase();
+    let ul = document.getElementById('list');
+    let li = ul.getElementsByTagName('li');
+
+    if (input.value?.length) {
+      ul.style.display = 'block';
+
+      for (let i = 0; i < li.length; i++) {
+        let span = li[i].getElementsByTagName('span')[0];
+        let txtValue = span.textContent || span.innerText;
+        let index = txtValue.toUpperCase().indexOf(filter);
+
+        if (index > -1) {
+          li[i].style.display = '';
+          let newString;
+
+          if (index === 0) {
+            span.innerHTML = '<strong>' + txtValue.slice(0, filter.length) + '</strong>' + txtValue.slice(filter.length);
+          }
+          else {
+            span.innerHTML = txtValue.slice(0, index) + '<strong>' + txtValue.slice(index, index + filter.length) + '</strong>' + txtValue.slice(index + filter.length);
+          }
+        }
+        else {
+          li[i].style.display = 'none';
+        }
+      }
+    }
+    else {
+      ul.style.display = 'none';
+    }
+  }
+</script>
+
+</body>
+</html>
