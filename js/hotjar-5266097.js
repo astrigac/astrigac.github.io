@@ -1,6 +1,6 @@
 window.hjSiteSettings = window.hjSiteSettings || {
-    "site_id": 5240223,
-    "rec_value": 1.0,
+    "site_id": 5266097,
+    "rec_value": 0.1,
     "state_change_listen_mode": "automatic",
     "record": true,
     "continuous_capture_enabled": true,
@@ -45,7 +45,7 @@ window.hjSiteSettings = window.hjSiteSettings || {
     "tracking_code_verified": true,
     "cs_project_id": null,
     "account_id": 3814370,
-    "account_signature": "07a29b89a8afe2daca249d7083a214815c158183f450492e3c3b01084e231021"
+    "account_signature": "a950e3059f73956e77f6e4d755eca15b86264912035fe9469f90595fd6048a4d"
 };
 
 !function() {
@@ -433,7 +433,7 @@ window.hjSiteSettings = window.hjSiteSettings || {
     var S, T, E, R, M, O, x, C, A, I, N, k = hj.metrics.start(), U = !(!window.CS_CONF || null === (j = window.CS_CONF.voc) || void 0 === j || !j.enabled), P = !(window.CS_CONF || !(null !== (_ = window.hjSiteSettings.features) && void 0 !== _ && _.includes("cs_lite") || window._hjSettings.csid));
     if (window.hjLazyModules = window.hjLazyModules || {
         SURVEY_V2: {
-            js: "survey-v2.22d050458bcef3d0f056.js"
+            js: "survey-v2.dc046ea7d8138ee75d72.js"
         },
         SURVEY_BOOTSTRAPPER: {
             js: "survey-bootstrapper.5280a8379cf419902f72.js"
@@ -457,7 +457,7 @@ window.hjSiteSettings = window.hjSiteSettings || {
             js: "browser-perf.8417c6bba72228fa2e29.js"
         },
         USER_TEST: {
-            js: "user-test.1d69adf5d5d8b961ffcc.js"
+            js: "user-test.802a35688394a8afd62a.js"
         }
     },
     U)
@@ -562,8 +562,9 @@ window.hjSiteSettings = window.hjSiteSettings || {
         var H = document.createElement("script");
         H.type = "text/javascript",
         H.async = !0,
-        H.src = "//".concat(z, "/uxa/smb/tag.js"),
-        document.getElementsByTagName("head")[0].appendChild(H)
+        H.src = "//".concat(z, "/uxa/smb/tag.js") //,
+        // CHANGE
+        //document.getElementsByTagName("head")[0].appendChild(H)
     } else
         window.hjBootstrap = window.hjBootstrap || function(e, t, n) {
             var r, i = new RegExp("bot|google|headless|baidu|bing|msn|duckduckbot|teoma|slurp|yandex|phantomjs|pingdom|ahrefsbot|facebook","i"), a = (null === (r = window.navigator) || void 0 === r ? void 0 : r.userAgent) || "unknown";
@@ -595,12 +596,13 @@ window.hjSiteSettings = window.hjSiteSettings || {
             d.async = 1,
             d.src = hj.scriptDomain + t,
             d.charset = "utf-8",
-            u.appendChild(d),
-            c.revision = "5ff46c9",
+            // CHANGE
+            //u.appendChild(d),
+            c.revision = "63ff0f2",
             window.hjBootstrap = c
         }
         ,
-        window.hjBootstrap("https://script.hotjar.com/", "modules.60031afbf51fb3e88a5b.js", "5240223"),
+        window.hjBootstrap("https://script.hotjar.com/", "modules.1f3821f9cafd68374ab2.js", "5266097"),
         hj.metrics.timeEnd("resource-blocking-time", {
             tag: {
                 resource: "hotjar-js"

@@ -1,4 +1,4 @@
-/*! For license information please see modules.60031afbf51fb3e88a5b.js.LICENSE.txt */
+/*! For license information please see modules.1f3821f9cafd68374ab2.js.LICENSE.txt */
 !function() {
     var e = {
         4788: function(e, t, n) {
@@ -1336,34 +1336,49 @@
         },
         4613: function(e, t, n) {
             "use strict";
+            function r() {
+                return r = Object.assign ? Object.assign.bind() : function(e) {
+                    for (var t = 1; t < arguments.length; t++) {
+                        var n = arguments[t];
+                        for (var r in n)
+                            Object.prototype.hasOwnProperty.call(n, r) && (e[r] = n[r])
+                    }
+                    return e
+                }
+                ,
+                r.apply(this, arguments)
+            }
             n.r(t),
             n.d(t, {
                 isUserTest: function() {
-                    return s
+                    return c
                 },
                 userTestStore: function() {
-                    return i
+                    return a
                 }
             });
-            var r = "https://voc.hotjar.com"
-              , o = "hj-uut"
-              , i = {
+            var o = "https://voc.hotjar.com"
+              , i = "hj-uut"
+              , a = {
                 get: function() {
-                    var e = window.sessionStorage.getItem(o);
+                    var e = window.sessionStorage.getItem(i);
                     return e ? JSON.parse(e) : null
                 },
                 set: function(e) {
-                    e && window.sessionStorage.setItem(o, JSON.stringify(e))
+                    if (e) {
+                        var t, n = null !== (t = a.get()) && void 0 !== t ? t : {};
+                        window.sessionStorage.setItem(i, JSON.stringify(r(r({}, n), e)))
+                    }
                 },
                 clear: function() {
-                    window.sessionStorage.removeItem(o)
+                    window.sessionStorage.removeItem(i)
                 }
             }
-              , a = function(e) {
+              , s = function(e) {
                 var t = new URLSearchParams(e);
                 return "1" === t.get("is_preview") ? t.has("task_uuid") : t.has("response_uuid") && t.has("task_uuid") && t.has("participation_uuid")
             }
-              , s = function() {
+              , c = function() {
                 var e, t = null !== (e = function() {
                     var e = document.referrer;
                     if ("string" == typeof e && function(e) {
@@ -1371,27 +1386,27 @@
                             return !1;
                         try {
                             var t = new URL(e);
-                            return "1" === t.searchParams.get("is_preview") ? !!t.hostname.endsWith(".hotjar.com") && !!t.pathname.includes("research/projects/tests") : null == e ? void 0 : e.includes(r)
+                            return "1" === t.searchParams.get("is_preview") ? !!t.hostname.endsWith(".hotjar.com") && !!t.pathname.includes("research/projects/tests") : null == e ? void 0 : e.includes(o)
                         } catch (e) {
                             return !1
                         }
-                    }(e) && a(new URL(e).search))
+                    }(e) && s(new URL(e).search))
                         return e
                 }()) && void 0 !== e ? e : function() {
                     var e, t = new URLSearchParams(window.location.search).get("hj_uut");
                     if (null !== (e = document.referrer) && void 0 !== e && e.includes("hotjar.com") && t) {
                         var n = window.atob(t);
-                        if (a(n)) {
-                            var o = new URL(r);
-                            return o.search = n,
-                            o.toString()
+                        if (s(n)) {
+                            var r = new URL(o);
+                            return r.search = n,
+                            r.toString()
                         }
                     }
-                }(), n = void 0 !== t, o = null !== i.get();
-                return n && i.set({
+                }(), n = void 0 !== t, r = null !== a.get();
+                return n && a.set({
                     referrer: t
                 }),
-                o || n
+                r || n
             }
         },
         6175: function(e, t, n) {
@@ -2576,7 +2591,7 @@
                         selector: hj.selector().get(t),
                         text: n,
                         type: e.target.type,
-                        suppression: "none" //LEAK
+                        suppression: "none" //CHANGE
                     }),
                     g = !0
                 }
@@ -2596,7 +2611,7 @@
                                     selector: e.selector,
                                     text: n.substring(0, o + 1),
                                     type: e.type,
-                                    suppression: "none" // LEAK
+                                    suppression: "none" //CHANGE
                                 });
                             t.text = n,
                             v.push(t)
@@ -9334,11 +9349,10 @@
                 }
             }
               , D = {
-                // LEAK
                 getSuppressedText: function(e, t) {
                     //var n = P[e];
                     //return n ? n(t) : R(t)
-                    return t
+                    return t //CHANGE
                 },
                 getSuppressedImageNode: function(e) {
                     var t = {
