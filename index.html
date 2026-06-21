@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>aurelstrigac.com</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specific page-level design for the portfolio/landing page */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 40px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 25px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            color: inherit;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-color: var(--text-secondary);
+        }
+        .card h3 {
+            margin-top: 0;
+            font-size: 1.3rem;
+            color: var(--text-primary);
+        }
+        .card p {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Global Header Navigation -->
+    <header class="top-header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">aurelstrigac.com</a>
+            <nav class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="red_notes.html">Pentesting Notes</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Wrapper -->
+    <main class="page-container">
+        
+        <section class="hero">
+            <h1>Welcome to My Personal Site</h1>
+            <p>Currently under construction. For more info, come back later.</p>
+        </section>
+
+        <section class="features">
+            <!-- Link directly to your pentesting notes -->
+            <a href="red_notes.html" class="card">
+                <h3>Pentesting Notes</h3>
+                <p>Personal cheat sheet containing workflows, tools, and reference scripts.</p>
+            </a>
+
+            <!-- Placeholder for future sections -->
+            <div class="card">
+                <h3>About Me</h3>
+                <p>Find more about my technical background and current tools of interest.</p>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

