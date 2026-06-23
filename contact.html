@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Aurel Strigac</title>
+    <!-- Link to the external global stylesheet -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <style>
+        /* Specific page-level layout matching the global design system */
+        .contact-wrapper {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-hero {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.01), 0 1px 3px rgba(0, 0, 0, 0.01);
+        }
+
+        .contact-hero h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .contact-hero p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Clickable contact card */
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 20px 30px;
+            text-decoration: none;
+            color: var(--text-primary);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.01), 0 1px 3px rgba(0, 0, 0, 0.01);
+            transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .contact-item:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-color);
+            box-shadow: 0 8px 30px rgba(234, 88, 12, 0.05), 0 1px 3px rgba(0, 0, 0, 0.01);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .contact-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            font-weight: 700;
+        }
+
+        .contact-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            transition: color 0.2s ease;
+        }
+
+        .contact-item:hover .contact-value {
+            color: var(--accent-color);
+        }
+
+        .arrow-icon {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        .contact-item:hover .arrow-icon {
+            transform: translateX(4px);
+            color: var(--accent-color);
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .contact-hero {
+                padding: 30px 20px;
+            }
+            .contact-item {
+                padding: 15px 20px;
+            }
+            .contact-value {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Global Header Navigation -->
+    <header class="top-header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">aurelstrigac.com</a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="red_notes.html">Notes</a>
+                <a href="contact.html" class="active">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="page-container">
+        <div class="contact-wrapper">
+            
+            <!-- Hero Header Card -->
+            <div class="contact-hero">
+                <h1>Get in Touch</h1>
+                <p>Have a question, feedback, or looking to collaborate? Reach out via any of the channels below.</p>
+            </div>
+
+            <!-- Contact Cards -->
+            <div class="contact-links">
+                
+                <!-- Email -->
+                <a href="mailto:contact@aurelstrigac.com" class="contact-item">
+                    <div class="contact-info">
+                        <span class="contact-label">Email</span>
+                        <span class="contact-value">contact@aurelstrigac.com</span>
+                    </div>
+                    <span class="arrow-icon">→</span>
+                </a>
+
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/aurel-strigac/" target="_blank" rel="noopener noreferrer" class="contact-item">
+                    <div class="contact-info">
+                        <span class="contact-label">LinkedIn</span>
+                        <span class="contact-value">linkedin.com/in/aurel-strigac</span>
+                    </div>
+                    <span class="arrow-icon">→</span>
+                </a>
+
+                <!-- GitHub -->
+                <a href="https://github.com/astrigac" target="_blank" rel="noopener noreferrer" class="contact-item">
+                    <div class="contact-info">
+                        <span class="contact-label">GitHub</span>
+                        <span class="contact-value">github.com/astrigac</span>
+                    </div>
+                    <span class="arrow-icon">→</span>
+                </a>
+
+            </div>
+
+            <!-- Global Footer -->
+            <footer class="site-footer">
+                <p>@2026 Aurel Strigac</p>
+            </footer>
+
+        </div>
+    </main>
+
+</body>
+</html>
