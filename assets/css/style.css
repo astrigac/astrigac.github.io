@@ -199,6 +199,7 @@ main.notes-content {
     border: 1px solid var(--border-color);
     border-radius: 18px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.02);
+    min-width: 0;
 }
 
 /* Content Sections Inside Unified Content Card */
@@ -246,7 +247,7 @@ li {
     margin-bottom: 5px;
 }
 
-/* Code Block Styling (High-contrast Black on White with subtle inset border) */
+/* Code Block Styling (Global layout safety constraints added) */
 pre {
     background-color: var(--code-bg);
     border: 1px solid var(--border-color);
@@ -255,6 +256,10 @@ pre {
     overflow-x: auto;
     margin: 15px 0;
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02);
+    width: 100%;
+    max-width: 100%;
+    white-space: pre;
+    word-wrap: normal;
 }
 
 code {
@@ -267,42 +272,108 @@ code {
     background-color: rgba(0, 0, 0, 0.04);
     padding: 2px 6px;
     border-radius: 6px;
-    color: #b91c1c; /* Contrast color for highlights */
+    color: #b91c1c;
     font-family: inherit;
     font-size: 0.9em;
 }
 
-/* 5. RESPONSIVE DESIGN (Adaptive layout adjustments for mobile screens) */
+/* 5. RESPONSIVE DESIGN (Optimized Mobile Layout without Sidebar) */
 @media (max-width: 768px) {
+    /* Hide the sidebar completely on mobile viewports */
+    aside {
+        display: none !important;
+    }
+
+    /* Shift the header into position for compact layouts */
     .top-header {
         top: 10px;
         left: 10px;
         right: 10px;
+        height: 48px; /* Slightly lower profile */
         border-radius: 14px;
     }
+
+    /* Adjust page-level padding to maximize reading space */
     .page-container {
-        margin-top: 85px;
+        margin-top: 75px;
+        padding: 0 10px 20px 10px;
     }
+
     .app-container {
-        margin-top: 80px;
-        flex-direction: column;
+        margin-top: 75px;
+        display: block; /* Switches from flexbox to standard block flow */
         height: auto;
         overflow: visible;
-        gap: 15px;
-        padding: 10px;
-    }
-    aside {
+        padding: 0 10px; /* Slight buffer from screen edge */
         width: 100%;
-        height: auto;
-        max-height: 280px;
-        border-radius: 14px;
-        position: sticky;
-        top: 80px;
-        z-index: 900;
     }
+
+    /* Transition main wrapper into borderless layout to merge with viewport background */
     main.notes-content {
-        border-radius: 14px;
-        padding: 20px;
-        overflow-y: visible;
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+        padding: 10px 0;
+    }
+
+    /* Individual sections become high-contrast floating cards */
+    .content-section {
+        background-color: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        padding: 24px 16px; /* Optimized spacing */
+        margin-bottom: 16px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02);
+    }
+
+    /* Scaled code blocks to fit viewport bounds and enable inertia touch scrolling */
+    pre {
+        padding: 12px;
+        margin: 12px 0;
+        border-radius: 8px;
+        font-size: 0.8rem;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    code {
+        font-size: 0.8rem;
+    }
+
+    /* Scaled headings and text elements for mobile reading comfort */
+    h2 {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+        padding-bottom: 8px;
+    }
+
+    h3 {
+        font-size: 1.1rem;
+        margin-top: 20px;
+        margin-bottom: 8px;
+    }
+
+    p, ul, ol {
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+}
+
+/* 6. EXTRA PROTECTION (Ultra-small displays, portrait mode or iPhone SE) */
+@media (max-width: 480px) {
+    .nav-container {
+        padding: 0 10px;
+    }
+
+    .logo {
+        font-size: 0.95rem;
+    }
+
+    .nav-links {
+        gap: 4px;
+    }
+
+    .nav-links a {
+        padding: 4px 8px;
+        font-size: 0.75rem;
     }
 }
