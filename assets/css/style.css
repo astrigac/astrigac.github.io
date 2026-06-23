@@ -24,7 +24,7 @@ body {
     line-height: 1.6;
 }
 
-/* 1. FLOATING TOP HEADER */
+/* FLOATING TOP HEADER */
 .top-header {
     height: var(--header-height);
     background-color: rgba(255, 255, 255, 0.75); /* Semi-transparent */
@@ -87,7 +87,7 @@ body {
     font-weight: 600;
 }
 
-/* 2. PAGE CONTAINER (Standard Pages like index.html) */
+/* PAGE CONTAINER (Standard Pages like index.html) */
 .page-container {
     margin-top: 95px; /* Accounting for floating header and gap */
     padding: 0 15px 30px 15px;
@@ -96,7 +96,7 @@ body {
     margin-right: auto;
 }
 
-/* 3. TWO-PANEL APP LAYOUT (For red_notes.html) */
+/* TWO-PANEL APP LAYOUT (For red_notes.html) */
 .app-container {
     margin-top: 82px; /* Accounting for floating header and gap */
     display: flex;
@@ -189,7 +189,7 @@ aside {
     font-weight: 600;
 }
 
-/* 4. MAIN FLOATING CONTENT AREA (Notes Page) */
+/* MAIN FLOATING CONTENT AREA (Notes Page) */
 main.notes-content {
     flex-grow: 1;
     overflow-y: auto;
@@ -293,7 +293,54 @@ code {
     clear: both;
 }
 
-/* 5. RESPONSIVE DESIGN (Optimized Mobile Layout without Sidebar) */
+/* CATEGORY TOGGLE BAR */
+.category-toggle-container {
+    display: flex;
+    background-color: var(--bg-accent);
+    padding: 4px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    gap: 4px;
+}
+
+.cat-toggle-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.cat-toggle-btn:hover {
+    color: var(--text-primary);
+}
+
+.cat-toggle-btn.active {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* CATEGORY MODULE BORDERS (Elegant Left Accent Borders) */
+.content-section.cat-it {
+    border-left: 5px solid #1c1c1e;       /* Apple Dark Black Left Accent */
+}
+
+.content-section.cat-defensive {
+    border-left: 5px solid #007aff;       /* iOS System Blue Left Accent */
+}
+
+.content-section.cat-offensive {
+    border-left: 5px solid #ff3b30;       /* iOS System Red Left Accent */
+}
+
+/* Optimized Mobile Layout without Sidebar */
 @media (max-width: 768px) {
     /* Hide the sidebar completely on mobile viewports */
     aside {

