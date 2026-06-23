@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>aurelstrigac.com</title>
     <!-- Link to the external stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
@@ -15,7 +15,7 @@
             <a href="index.html" class="logo">aurelstrigac.com</a>
             <nav class="nav-links">
                 <a href="index.html">Home</a>
-                <a href="red_notes.html" class="active">Pentesting Notes</a>
+                <a href="red_notes.html" class="active">Notes</a>
             </nav>
         </div>
     </header>
@@ -395,55 +395,6 @@ http://target.thm/test.php?view=php://filter/read=convert.base64-encode/resource
         </main>
     </div>
 
-    <script>
-        // Section Scroll Tracker (ScrollSpy)
-        document.addEventListener('DOMContentLoaded', () => {
-            const scrollContainer = document.querySelector('main.notes-content');
-            const sections = document.querySelectorAll('.content-section');
-            const navLinks = document.querySelectorAll('.sidebar-menu a');
-
-            if (!scrollContainer || sections.length === 0) return;
-
-            // Configure the observer to watch the scrollable main container
-            const observerOptions = {
-                root: scrollContainer,
-                // Triggers active state when a section is roughly in the lower quarter of page
-                rootMargin: '-10% 0px -35% 0px', 
-                threshold: 0
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const id = entry.target.getAttribute('id');
-                        navLinks.forEach(link => {
-                            if (link.getAttribute('href') === `#${id}`) {
-                                link.classList.add('active');
-                            } else {
-                                link.classList.remove('active');
-                            }
-                        });
-                    }
-                });
-            }, observerOptions);
-
-            sections.forEach(section => observer.observe(section));
-        });
-
-        // Notes Search
-        function filterNotes() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let sections = document.querySelectorAll('.content-section');
-            
-            sections.forEach(section => {
-                let text = section.innerText.toLowerCase();
-                if (text.includes(input)) {
-                    section.style.display = "";
-                } else {
-                    section.style.display = "none";
-                }
-            });
-        }
-    </script>
+    <script src="assets/js/notes.js"></script>
 </body>
 </html>
