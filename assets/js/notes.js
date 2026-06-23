@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const id = entry.target.getAttribute('id');
-                avLinks.forEach(link => {
+                navLinks.forEach(link => {
                     if (link.getAttribute('href') === `#${id}`) {
                         link.classList.add('active');
                     } else {
@@ -38,11 +38,11 @@ function filterNotes() {
     let sections = document.querySelectorAll('.content-section');
             
     sections.forEach(section => {
-    let text = section.innerText.toLowerCase();
-    if (text.includes(input)) {
-        section.style.display = "";
-    } else {
-        section.style.display = "none";
-    }
+        let text = section.innerText.toLowerCase();
+        if (text.includes(input)) {
+            section.style.display = "";
+        } else {
+            section.style.display = "none";
+        }
     });
 }
