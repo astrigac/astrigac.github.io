@@ -67,7 +67,7 @@ body {
 }
 
 .nav-links a {
-    color: var(--text-secondary);
+    color: #000000;
     text-decoration: none;
     font-size: 0.9rem;
     font-weight: 500;
@@ -82,8 +82,8 @@ body {
 }
 
 .nav-links a.active {
-    color: var(--accent-color);
-    background-color: rgba(234, 88, 12, 0.08); /* Soft orange tint */
+    color: #ffffff;
+    background-color: var(--accent-color);
     font-weight: 600;
 }
 
@@ -170,11 +170,11 @@ aside {
 .sidebar-menu a {
     display: block;
     padding: 8px 16px;
-    color: var(--text-secondary);
+    color: #000000;
     text-decoration: none;
     font-size: 0.9rem;
     font-weight: 500;
-    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: all 0.12s cubic-bezier(0.25, 0.8, 0.25, 1);
     border-radius: 10px;
 }
 
@@ -184,8 +184,8 @@ aside {
 }
 
 .sidebar-menu a.active {
-    color: var(--accent-color);
-    background-color: rgba(234, 88, 12, 0.08); /* Soft orange tint */
+    color: #ffffff;
+    background-color: var(--accent-color); /* Soft orange tint */
     font-weight: 600;
 }
 
