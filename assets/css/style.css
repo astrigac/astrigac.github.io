@@ -174,7 +174,6 @@ aside {
     text-decoration: none;
     font-size: 0.9rem;
     font-weight: 500;
-    transition: all 0.12s cubic-bezier(0.25, 0.8, 0.25, 1);
     border-radius: 10px;
 }
 
@@ -193,14 +192,12 @@ aside {
 main.notes-content {
     flex-grow: 1;
     overflow-y: auto;
-    /* Added 30px top and bottom padding to offset the mask fade zone when fully scrolled */
     padding: 15px 15px 15px 0; 
-    scroll-behavior: smooth;
     background-color: transparent; /* Transparent to let individual bubble cards float */
-    border: none;                  /* Removed outer container border */
-    border-radius: 0;              /* Removed outer container border radius */
-    box-shadow: none;              /* Removed outer container shadow */
-    min-width: 0;                  /* Prevents container from stretching past screen limits */
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    min-width: 0;
 
     /* Custom CSS Masking: Fades out top and bottom 30px dynamically on scroll */
     -webkit-mask-image: linear-gradient(to bottom, transparent, black 15px, black calc(100% - 30px), transparent);
@@ -340,11 +337,68 @@ code {
     border-left: 5px solid #ff3b30;       /* iOS System Red Left Accent */
 }
 
+/* SCROLL-TO-TOP FLOATING PANEL */
+.notes-wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    position: relative;
+}
+
+.scroll-top-btn {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    
+    /* Initially hidden */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.15s ease;
+}
+
+/* Button state: Scrolled down (Transparent but apparent) */
+.scroll-top-btn.visible {
+    opacity: 0.65;
+    visibility: visible;
+}
+
+/* Button state: Hover */
+.scroll-top-btn.visible:hover {
+    opacity: 1.0;
+    transform: translateX(-50%) translateY(-2px);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
 /* Optimized Mobile Layout without Sidebar */
 @media (max-width: 768px) {
     /* Hide the sidebar completely on mobile viewports */
     aside {
         display: none !important;
+    }
+
+    .notes-wrapper {
+        position: relative;
+        width: 100%;
+    }
+    .scroll-top-btn {
+        bottom: 20px; /* Snugger fit on mobile displays */
     }
 
     /* Shift the header into position for compact layouts */
