@@ -96,7 +96,7 @@ body {
     margin-right: auto;
 }
 
-/* TWO-PANEL APP LAYOUT (For red_notes.html) */
+/* TWO-PANEL APP LAYOUT (For notes.html) */
 .app-container {
     margin-top: 82px; /* Accounting for floating header and gap */
     display: flex;
