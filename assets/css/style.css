@@ -346,7 +346,7 @@ code {
     position: relative;
 }
 
-.scroll-top-btn {
+.jumper {
     position: absolute;
     bottom: 25px;
     left: 50%;
@@ -373,13 +373,13 @@ code {
 }
 
 /* Button state: Scrolled down (Transparent but apparent) */
-.scroll-top-btn.visible {
+.jumper.visible {
     opacity: 0.65;
     visibility: visible;
 }
 
 /* Button state: Hover */
-.scroll-top-btn.visible:hover {
+.jumper.visible:hover {
     opacity: 1.0;
     transform: translateX(-50%) translateY(-2px);
     border-color: var(--accent-color);
@@ -397,7 +397,7 @@ code {
         position: relative;
         width: 100%;
     }
-    .scroll-top-btn {
+    .jumper {
         bottom: 20px; /* Snugger fit on mobile displays */
     }
 

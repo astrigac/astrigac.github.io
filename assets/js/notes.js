@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     navLinks = document.querySelectorAll('.sidebar-menu a');
     toggleButtons = document.querySelectorAll('.cat-toggle-btn');
     sidebarMenuLinks = document.querySelectorAll('.sidebar-menu li');
-    scrollTopBtn = document.querySelector('.scroll-top-btn');
+    scrollTopBtn = document.querySelector('.jumper');
 
     if (!scrollContainer || sections.length === 0) return;
 
