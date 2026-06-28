@@ -33,7 +33,7 @@
             <nav class="sidebar-menu">
                 <ul>
                     <li><a href="#basic-commands">Basic Commands</a></li>
-                    <li><a href="#pivoting-protocols">Pivoting &amp; Protocols</a></li>
+                    <li><a href="#service-interaction">Service Interaction</a></li>
                     <li><a href="#common-tools">Common Tools</a></li>
                     <li><a href="#enumeration">Service Enumeration</a></li>
                     <li><a href="#cracking">Password Cracking</a></li>
@@ -63,11 +63,30 @@
                 
                 <h3>File Operations &amp; Search</h3>
                 <p>Common commands for finding files and interacting with the system environment.</p>
-                <pre><code># Find file inside a directory, ignoring errors
-find / -name "&lt;filename&gt;" 2&gt;/dev/null
+                <pre><code># Basic syntax: find &lt;starting-directory&gt; &lt;options&gt; &lt;search-term&gt;
+# By Name or Extension:
+find / -name "flag.txt" 2&gt;/dev/null       -&gt; Exact match
+find / -iname "flag.txt" 2&gt;/dev/null      -&gt; Case-insensitive match
+find / -name "*.txt" 2&gt;/dev/null          -&gt; Wildcard search (all .txt files)
 
-# Find files belonging to a specific user
-find / -user &lt;username&gt; 2&gt;/dev/null
+# By User or Group:
+find / -user &lt;username> 2&gt;/dev/null       -&gt; Find files owned by specific user
+find / -group &lt;groupname> 2&gt;/dev/null     -&gt; Find files owned by specific group
+
+# By File Type:
+find / -type f -name "..." 2&gt;/dev/null    -&gt; Search for files only
+find / -type d -name "..." 2&gt;/dev/null    -&gt; Search for directories only
+
+# By Time (Modified/Accessed):
+find / -mmin -10 2&gt;/dev/null              -&gt; Files modified in the last 10 minutes 
+                                            (for seeing what a running script is doing)
+find / -mtime -2 2&gt;/dev/null              -&gt; Files modified in the last 2 days
+
+# By Size:
+find / -size +50M 2&gt;/dev/null             -&gt; Find files larger than 50 Megabytes
+
+# Execute a command on found items:
+find / -name "*.bak" -exec cat {} +       -&gt; Find all .bak files and read them
 
 # Locate files using built-in search
 search -f &lt;filename&gt;</code></pre>
@@ -90,8 +109,12 @@ ftp &lt;IP-addr&gt;</code></pre>
                 <pre><code># HTTP Request with parameters/headers
 curl -L &lt;url&gt; -H "Cookie: value" -d "user=robert"
 
+# Fetching files from remote hosts
+# For custom port, use: -P &lt;port_number&gt;
+scp &lt;username&gt;@&lt;IP-addr&gt;:&lt;/path/to/remote/image.png&gt; &lt;/path/to/local/destination/&gt;
+
 # Text searching
-grep "search_term" file_path
+grep "search_term" &lt;file_path&gt;
 
 # Archiving tools
 unzip &lt;filename&gt;
@@ -108,6 +131,7 @@ traceroute &lt;ip-addr&gt;</code></pre>
 
                 <h3>Netcat (nc)</h3>
                 <pre><code># Listen Mode
+# Use -k to keep listening after client disconnects
 nc -lvnp &lt;port&gt;
 
 # Connect Mode
@@ -121,9 +145,9 @@ systemctl list-units --type=service --state=running
 systemctl status &lt;service-name&gt;</code></pre>
             </section>
 
-            <!-- Pivoting & Protocols -->
-            <section id="pivoting-protocols" class="content-section cat-it">
-                <h2>Pivoting on Servers</h2>
+            <!-- Service Interaction -->
+            <section id="service-interaction" class="content-section cat-it">
+                <h2>Service Interaction</h2>
                 
                 <h3>POP3 Protocol</h3>
                 <pre><code>USER &lt;username&gt;
