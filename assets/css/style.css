@@ -1,6 +1,6 @@
 :root {
-    --bg-primary: #f2f2f7;       /* Soft iOS system gray background */
-    --bg-secondary: #ffffff;     /* Pure white for panels and containers */
+    --bg-primary: #ffffff;       /* Pure white */
+    --bg-secondary: #f5f5f7;     /* Soft gray background */
     --bg-accent: #e5e5ea;        /* Subtle medium grey */
     --text-primary: #1c1c1e;     /* iOS primary label dark color */
     --text-secondary: #8e8e93;   /* iOS secondary label grey */
@@ -27,7 +27,7 @@ body {
 /* FLOATING TOP HEADER */
 .top-header {
     height: var(--header-height);
-    background-color: rgba(255, 255, 255, 0.75); /* Semi-transparent */
+    background-color: var(--bg-secondary); /* Semi-transparent */
     backdrop-filter: blur(20px) saturate(190%);    /* iOS Glassmorphism */
     -webkit-backdrop-filter: blur(20px) saturate(190%);
     border: 1px solid var(--border-color);
@@ -110,7 +110,7 @@ body {
 /* FLOATING VERTICAL SIDEBAR */
 aside {
     width: 280px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: var(--bg-secondary);
     backdrop-filter: blur(20px) saturate(190%);
     -webkit-backdrop-filter: blur(20px) saturate(190%);
     border: 1px solid var(--border-color);
@@ -337,6 +337,19 @@ code {
     border-left: 5px solid #ff3b30;       /* iOS System Red Left Accent */
 }
 
+/* Styling for all inline links inside notes cards */
+.content-section a {
+    color: var(--accent-color);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.12s ease;
+}
+
+.content-section a:hover {
+    color: #c2410c;
+    text-decoration: underline;
+}
+
 /* SCROLL-TO-TOP FLOATING PANEL */
 .notes-wrapper {
     flex-grow: 1;
@@ -384,6 +397,77 @@ code {
     transform: translateX(-50%) translateY(-2px);
     border-color: var(--accent-color);
     color: var(--accent-color);
+}
+
+/* Parent Accordion Container */
+.code-accordion {
+    border-bottom: 1px solid var(--border-color); /* Divider to organize vertical spacing */
+    margin-bottom: 0; /* Let the divider define the item limits */
+    transition: padding 0.2s ease;
+}
+
+/* Remove the divider on the last accordion to avoid duplicate borders */
+.code-accordion:last-of-type {
+    border-bottom: none;
+    margin-bottom: 20px; /* Gives spacing before any static content below */
+}
+
+/* Summary element styled as a cohesive interactive row */
+.code-accordion summary {
+    font-size: 1.05rem; /* Sized slightly down to feel more structured */
+    font-weight: 600;
+    color: var(--text-primary);
+    padding: 12px 10px; /* Generous breathing room for touch/click interaction */
+    margin-top: 0; /* Cleared aggressive margins to prevent crowding */
+    margin-bottom: 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-start; /* Aligns both the arrow and the text to the left */
+    align-items: center;
+    gap: 10px; /* Creates a clean, controlled gap between the arrow and the text */
+    user-select: none;
+    border-radius: 10px; /* Soft rounding for hover background highlight */
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+/* Hide default browser indicator */
+.code-accordion summary::-webkit-details-marker {
+    display: none;
+}
+.code-accordion summary {
+    list-style: none;
+}
+
+/* Full row hover effect */
+.code-accordion summary:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+    color: var(--accent-color);
+}
+
+/* Custom indicator on the LEFT (changed from ::after to ::before) */
+.code-accordion summary::before {
+    content: '▶'; /* Right-pointing arrow for collapsed state */
+    font-size: 0.6rem; /* Slightly smaller for a refined, subtle appearance */
+    color: var(--text-secondary);
+    display: inline-block; /* Required for the transform rotate to work */
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s ease;
+}
+
+/* Rotate the arrow 90 degrees downward when open */
+.code-accordion[open] summary::before {
+    transform: rotate(90deg);
+    color: var(--accent-color);
+}
+
+/* Extra breathing room when code block is revealed */
+.code-accordion[open] {
+    padding-bottom: 8px;
+}
+
+/* Clean inside offset for revealed code blocks */
+.code-accordion pre {
+    margin: 8px 10px 12px 10px;
+    background-color: var(--code-bg);
 }
 
 /* Optimized Mobile Layout without Sidebar */
